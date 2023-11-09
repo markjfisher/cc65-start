@@ -333,7 +333,7 @@ $(TARGETOBJDIR)/%.o: %.s | $(TARGETOBJDIR)
 	$(CC) -t $(TARGETLIST) -c --create-dep $(@:.o=.d) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/$(PROGRAM): $(OBJECTS) $(LIBS) | $(BUILD_DIR)
-	$(CC) -t $(TARGETLIST) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
+	$(CC) -l build/final.lst -t $(TARGETLIST) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
 
 $(PROGRAM): $(BUILD_DIR)/$(PROGRAM) | $(BUILD_DIR)
 
