@@ -4,8 +4,8 @@
 
 #include "debug.h"
 
-void main(void) {
+int main(void) {
     printf("hello, world!\n");
     cgetc();
-    exit(0);
+    return 0;
 }
