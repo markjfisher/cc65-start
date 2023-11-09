@@ -263,7 +263,9 @@ CFLAGS += -DBUILD_$(UPPER_TARGETLIST)
 ASFLAGS += -DBUILD_$(UPPER_TARGETLIST)
 LDFLAGS += -DBUILD_$(UPPER_TARGETLIST)
 
+ifeq ($(TARGETS),atari)
 LDFLAGS += --start-addr 0x3000
+endif
 
 .SUFFIXES:
 .PHONY: all clean dist $(PROGRAM).$(TARGETLIST)
@@ -333,7 +335,7 @@ $(TARGETOBJDIR)/%.o: %.s | $(TARGETOBJDIR)
 	$(CC) -t $(TARGETLIST) -c --create-dep $(@:.o=.d) $(ASFLAGS) -o $@ $<
 
 $(BUILD_DIR)/$(PROGRAM): $(OBJECTS) $(LIBS) | $(BUILD_DIR)
-	$(CC) -l build/final.lst -t $(TARGETLIST) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
+	$(CC) -t $(TARGETLIST) $(LDFLAGS) -o $@ $(patsubst %.cfg,-C %.cfg,$^)
 
 $(PROGRAM): $(BUILD_DIR)/$(PROGRAM) | $(BUILD_DIR)
 
